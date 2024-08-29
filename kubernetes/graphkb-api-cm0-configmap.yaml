@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  keycloak.key: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArQHoUyGJa2uiBnpXh9renYNIQlOJVQNbY+rhTa5+HBm9BXH8O9/LYUdh717OQ+naATZ6K8Sc35lxlEzZ0Nw/Xj3+PSNbdEJ7uCxoo82xxbA5wcrMHrJyNnTSMSQd5k9diMJEAJ3PDyqgsTOaNf6N68/QCXu+orj+OXe7emy9IOVsP3ZgaA74iKzJTIHT4nJrPxQ6ip6pYxehwAPP+N1nDZunKxpnMurAn85QR+aqJhfxa3ZtcmRPu2+6/hjRM315yeyyQjYDwlXXKEhi3Rg/62UP9F73yXpff83F0oTEfmdrDAqW6V+6n4a0cUszbSeLhGMBFOg4UsvrfTIptCbkHwIDAQAB
+    -----END PUBLIC KEY-----
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: graphkb-api
+  name: graphkb-api-cm0

@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file ../docker-compose.dev.yml convert
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: graphkb-api
+  name: graphkb-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: graphkb-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose --file ../docker-compose.dev.yml convert
+        kompose.version: 1.34.0 (cbf2835db)
+      labels:
+        io.kompose.service: graphkb-api
+    spec:
+      containers:
+        - env:
+            - name: GKB_CORS_ORIGIN
+              value: ^.*$
+            - name: GKB_DBS_PASS
+              value: root
+            - name: GKB_DB_CREATE
+              value: "1"
+            - name: GKB_DB_HOST
+              value: graphkb_db
+            - name: GKB_DB_NAME
+              value: graphkb
+            - name: GKB_KEYCLOAK_KEY_FILE
+              value: /keys/keycloak.key
+            - name: GKB_KEYCLOAK_URI
+              value: http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token
+            - name: KEY_PASSPHRASE
+          image: bcgsc/pori-graphkb-api:latest
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://graphkb_api:8080/api/version
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
+          name: graphkb-api
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /keys
+              name: graphkb-api-cm0
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            name: graphkb-api-cm0
+          name: graphkb-api-cm0
