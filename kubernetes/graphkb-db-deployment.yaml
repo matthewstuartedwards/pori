@@ -6,7 +6,8 @@ metadata:
     kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: graphkb-db
-  name: graphkb-db
+  name: db
+  namespace: graphkb
 spec:
   replicas: 1
   selector:

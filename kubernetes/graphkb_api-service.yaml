@@ -6,7 +6,8 @@ metadata:
     kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: graphkb-api
-  name: graphkb-api
+  name: api
+  namespace: graphkb
 spec:
   ports:
     - name: "8080"

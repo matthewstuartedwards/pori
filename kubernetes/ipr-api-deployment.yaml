@@ -6,7 +6,8 @@ metadata:
     kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: ipr-api
-  name: ipr-api
+  name: api
+  namespace: ipr
 spec:
   replicas: 1
   selector:
@@ -40,13 +41,15 @@ spec:
             - name: IPR_GRAPHKB_PASSWORD
               value: "ipr_graphkb_link"
             - name: IPR_GRAPHKB_URI
-              value: "http://graphkb_api:8080/api"
+              #value: "http://graphkb_api:8080/api"
+              value: "http://api.graphkb.svc.cluster.loal:8080/api"
             - name: IPR_GRAPHKB_USERNAME
               value: "ipr_graphkb_link"
             - name: IPR_KEYCLOAK_KEYFILE
               value: "/keys/keycloak.key"
             - name: IPR_KEYCLOAK_URI
-              value: "http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token"
+              #value: "http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token"
+              value: "http://keycloak.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token"
             - name: IPR_REDIS_HOST
               value: "redis"
             - name: IPR_REDIS_PORT

@@ -3,7 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   labels:
     io.kompose.service: graphkb-db-claim1
-  name: graphkb-db-claim1
+  name: db-claim1
+  namespace: graphkb
 spec:
   accessModes:
     - ReadWriteOnce

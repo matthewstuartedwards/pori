@@ -6,7 +6,8 @@ metadata:
     kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: graphkb-client
-  name: graphkb-client
+  name: client
+  namespace: graphkb
 spec:
   ports:
     - name: "5000"

@@ -6,7 +6,8 @@ metadata:
     kompose.version: 1.34.0 (cbf2835db)
   labels:
     io.kompose.service: graphkb-api
-  name: graphkb-api
+  name: api
+  namespace: graphkb
 spec:
   replicas: 1
   selector:
@@ -37,7 +38,8 @@ spec:
             - name: GKB_KEYCLOAK_KEY_FILE
               value: /keys/keycloak.key
             - name: GKB_KEYCLOAK_URI
-              value: http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token
+              #value: http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token
+              value: http://keycload.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token
             - name: KEY_PASSPHRASE
           image: bcgsc/pori-graphkb-api:latest
           livenessProbe:
@@ -45,7 +47,8 @@ spec:
               command:
                 - curl
                 - -f
-                - http://graphkb_api:8080/api/version
+                #- http://graphkb_api:8080/api/version
+                - http://api.graphkb.svc.cluster.local:8080/api/version
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 10
