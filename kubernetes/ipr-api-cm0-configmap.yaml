@@ -9,3 +9,4 @@ metadata:
   labels:
     io.kompose.service: ipr-api
   name: ipr-api-cm0
+  namespace: ipr

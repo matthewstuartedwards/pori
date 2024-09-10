@@ -3,7 +3,7 @@
       "username": "ipr_service",
       "password": "root",
       "database": "ipr",
-      "host": "ipr_db",
+      "host": "db.ipr.svc.cluster.local",
       "dialect": "postgres"
     },
     "test": {

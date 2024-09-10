@@ -32,7 +32,7 @@ spec:
             - name: GKB_DB_CREATE
               value: "1"
             - name: GKB_DB_HOST
-              value: graphkb_db
+              value: db.graphkb.svc.cluster.local
             - name: GKB_DB_NAME
               value: graphkb
             - name: GKB_KEYCLOAK_KEY_FILE

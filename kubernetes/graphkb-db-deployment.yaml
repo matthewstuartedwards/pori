@@ -36,9 +36,9 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /orientdb/backup
-              name: graphkb-db-claim1
+              name: db-claim1
       restartPolicy: Always
       volumes:
-        - name: graphkb-db-claim1
+        - name: db-claim1
           persistentVolumeClaim:
-            claimName: graphkb-db-claim1
+            claimName: db-claim1

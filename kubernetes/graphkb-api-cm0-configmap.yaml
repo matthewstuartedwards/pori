@@ -9,3 +9,4 @@ metadata:
   labels:
     io.kompose.service: graphkb-api
   name: graphkb-api-cm0
+  namespace: graphkb

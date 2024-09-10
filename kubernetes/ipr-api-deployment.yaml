@@ -31,7 +31,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: IPR_DATABASE_HOSTNAME
-              value: "ipr_db"
+              value: "db.ipr.svc.cluster.local"
             - name: IPR_DATABASE_NAME
               value: "ipr_demo"
             - name: IPR_DATABASE_PASSWORD
@@ -51,7 +51,7 @@ spec:
               #value: "http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token"
               value: "http://keycloak.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token"
             - name: IPR_REDIS_HOST
-              value: "redis"
+              value: "redis.db.svc.cluster.local"
             - name: IPR_REDIS_PORT
               value: "6379"
           #livenessProbe:

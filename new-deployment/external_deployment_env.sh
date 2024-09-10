@@ -10,7 +10,7 @@ export GKB_DBS_PASS=root
 export IPR_POSTGRES_USER=postgres
 export IPR_POSTGRES_PASSWORD=root # set this
 
-export IPR_DATABASE_HOSTNAME=ipr_db
+export IPR_DATABASE_HOSTNAME=db.ipr.svc.cluster.local
 export IPR_DATABASE_NAME=ipr
 export IPR_DATABASE_USERNAME=ipr_service
 export IPR_DATABASE_PASSWORD=root #set this
