@@ -33,6 +33,8 @@ spec:
               value: admin
             - name: PROXY_ADDRESS_FORWARDING
               value: "true"
+            - name: DB_VENDOR
+              value: "h2"
           image: pori-keycloak
           imagePullPolicy: Never
           #livenessProbe:
