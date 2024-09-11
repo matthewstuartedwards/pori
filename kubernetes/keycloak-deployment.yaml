@@ -36,7 +36,7 @@ spec:
             - name: DB_VENDOR
               value: "h2"
           image: pori-keycloak
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           #livenessProbe:
           #  exec:
           #    command:

@@ -6,8 +6,9 @@ metadata:
   name: db-claim1
   namespace: graphkb
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: 10Gi
