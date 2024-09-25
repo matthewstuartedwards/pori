@@ -42,14 +42,14 @@ spec:
               value: "ipr_graphkb_link"
             - name: IPR_GRAPHKB_URI
               #value: "http://graphkb_api:8080/api"
-              value: "http://api.graphkb.svc.cluster.loal:8080/api"
+              value: "http://ipr/api"
             - name: IPR_GRAPHKB_USERNAME
               value: "ipr_graphkb_link"
             - name: IPR_KEYCLOAK_KEYFILE
               value: "/keys/keycloak.key"
             - name: IPR_KEYCLOAK_URI
-              #value: "http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token"
-              value: "http://keycloak.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token"
+              value: "http://keycloak/auth/realms/PORI/protocol/openid-connect/token"
+              #value: "http://keycloak.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token"
             - name: IPR_REDIS_HOST
               value: "redis.db.svc.cluster.local"
             - name: IPR_REDIS_PORT

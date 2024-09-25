@@ -25,14 +25,14 @@ spec:
         - env:
             - name: API_BASE_URL
               #value: http://localhost:8080
-              value: "http://api.graphkb.svc.cluster.local:8080"
+              value: "http://graphkb"
             - name: KEYCLOAK_CLIENT_ID
               value: GraphKB
             - name: KEYCLOAK_REALM
               value: PORI
             - name: KEYCLOAK_URL
               #value: http://localhost:8888/auth
-              value: "http://keycloak.security.svc.cluster.local:8888/auth"
+              value: "http://keycloak/auth"
             - name: PUBLIC_PATH
               value: /
           image: bcgsc/pori-graphkb-client:latest

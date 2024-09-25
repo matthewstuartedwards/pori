@@ -39,7 +39,7 @@ spec:
               value: /keys/keycloak.key
             - name: GKB_KEYCLOAK_URI
               #value: http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token
-              value: http://keycloak.security.svc.cluster.local:8888/auth/realms/PORI/protocol/openid-connect/token
+              value: http://keycloak/auth/realms/PORI/protocol/openid-connect/token
             - name: KEY_PASSPHRASE
           image: bcgsc/pori-graphkb-api:latest
           livenessProbe:
@@ -48,7 +48,7 @@ spec:
                 - curl
                 - -f
                 #- http://graphkb_api:8080/api/version
-                - http://api.graphkb.svc.cluster.local:8080/api/version
+                - http://graphkb/api/version
             failureThreshold: 5
             periodSeconds: 30
             timeoutSeconds: 10

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  annotations:
+  name: client-ipr-ingress
+  namespace: ipr
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ipr
+    http:
+      paths:
+      - backend:
+          service:
+            name: client
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+      - backend:
+          service:
+            name: api
+            port:
+              number: 8080
+        path: /api
+        pathType: Prefix
+        

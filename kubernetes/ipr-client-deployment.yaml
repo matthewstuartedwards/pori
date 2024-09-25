@@ -24,13 +24,19 @@ spec:
       containers:
         - env:
             - name: API_BASE_URL
-              value: http://localhost:8081/api
+              #value: http://localhost:8081/api
+              #value: http://api.ipr.svc.cluster.local:8081
+              value: http://ipr
             - name: GRAPHKB_URL
-              value: http://localhost:5000
+              #value: http://localhost:5000
+              #value: http://client.graphkb.svc.cluster.local:5000
+              value: http://graphkb
             - name: KEYCLOAK_REALM
               value: PORI
             - name: KEYCLOAK_URL
-              value: http://localhost:8888/auth
+              #value: http://localhost:8888/auth
+              #value: "http://keycloak.security.svc.cluster.local:8888/auth"
+              value: "http://keycloak/auth"
             - name: PUBLIC_PATH
               value: /
           image: bcgsc/pori-ipr-client:latest
