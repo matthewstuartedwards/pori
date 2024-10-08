@@ -100,7 +100,7 @@ services:
     ports:
       - 8081:8080
     environment:
-      IPR_DATABASE_HOSTNAME: ipr_db
+      IPR_DATABASE_HOSTNAME: db.ipr.svc.cluster.local
       IPR_DATABASE_NAME: ipr_demo
       IPR_DATABASE_USERNAME: ipr_ro
       IPR_GRAPHKB_USERNAME: ipr_graphkb_link

@@ -7,8 +7,9 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/storage"
+    path: "/storage/kubernetesStorage"
+    type: DirectoryOrCreate
