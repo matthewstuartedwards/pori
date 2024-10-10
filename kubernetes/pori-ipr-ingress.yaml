@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-  name: client-ipr-ingress
+  name: ipr-client-ingress
   namespace: ipr
 spec:
   ingressClassName: nginx

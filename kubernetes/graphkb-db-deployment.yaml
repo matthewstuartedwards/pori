@@ -27,12 +27,12 @@ spec:
         - env:
             - name: ORIENTDB_ROOT_PASSWORD
               value: root
-          image: orientdb:3.2
+          image: orientdb:3.0
           command: ["/bin/sh", "-c"]
           args: # Make a temp directory for the wal and then launch the server.
             - |
               mkdir /tmp/wal
-              server.sh -Ddistrubuted=true -Dstorage.wal.path=/tmp/wal
+              server.sh -Dstorage.wal.path=/tmp/wal -Ddistributed=true -D-Dlog.file.level=FINE
           name: graphkb-db
           ports:
             - containerPort: 2424
@@ -41,22 +41,30 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "4G"
+              memory: "2G"
               cpu: ".25"
             limits:
               memory: "8G"
               cpu: "2"
           volumeMounts:
-            - mountPath: /orientdb/backup
+            - mountPath: /orientdb/databases/
+              name: hostpath-vol0
+              #name: db-claim1
+              #subPath: backup
+            #- mountPath: /orientdb/databases
               #name: hostpath-vol0
-              name: db-claim1
-              subPath: backup
-            - mountPath: /orientdb/databases
-              #name: hostpath-vol0
-              name: db-claim1
-              subPath: databases
+              #name: db-claim1
+              #subPath: databases
       restartPolicy: Always
-      volumes: 
-        - name: db-claim1
-          persistentVolumeClaim:
-            claimName: db-claim1
+      volumes: [
+        {
+        "name": "hostpath-vol0",
+        "hostPath": {
+          "path": "/orientdb/",
+          "type": "DirectoryOrCreate"
+          }
+        }
+      ]
+        #- name: db-claim1
+        #  persistentVolumeClaim:
+        #    claimName: db-claim1

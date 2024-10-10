@@ -11,5 +11,5 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/storage/kubernetesStorage"
+    path: "/storage/kubernetesStorage/"
     type: DirectoryOrCreate

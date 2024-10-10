@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-  name: virtual-host-ingress
+  name: graphkb-client-ingress
   namespace: graphkb
 spec:
   ingressClassName: nginx
