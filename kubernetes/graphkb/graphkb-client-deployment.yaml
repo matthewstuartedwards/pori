@@ -35,7 +35,9 @@ spec:
               value: "http://keycloak/auth"
             - name: PUBLIC_PATH
               value: /
-          image: bcgsc/pori-graphkb-client:latest
+            #- name: IS_DEMO
+            #  value: "1"
+          image: bcgsc/pori-graphkb-client
           name: graphkb-client
           ports:
             - containerPort: 80

@@ -27,5 +27,14 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP
+          livenessProbe:
+            exec:
+              command: 
+              - redis-cli
+              - -h
+              - redis.db.svc.cluster.local
+              - ping
+            periodSeconds: 30
+            timeoutSeconds: 10
       restartPolicy: Always
       hostname: "redis"

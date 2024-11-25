@@ -26,11 +26,11 @@ spec:
             - name: API_BASE_URL
               #value: http://localhost:8081/api
               #value: http://api.ipr.svc.cluster.local:8081
-              value: http://ipr
+              value: http://ipr/api
             - name: GRAPHKB_URL
               #value: http://localhost:5000
               #value: http://client.graphkb.svc.cluster.local:5000
-              value: http://graphkb
+              value: http://graphkb/
             - name: KEYCLOAK_REALM
               value: PORI
             - name: KEYCLOAK_URL

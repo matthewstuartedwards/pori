@@ -33,7 +33,7 @@ spec:
             - name: IPR_DATABASE_HOSTNAME
               value: "db.ipr.svc.cluster.local"
             - name: IPR_DATABASE_NAME
-              value: "ipr_demo"
+              value: "pori"
             - name: IPR_DATABASE_PASSWORD
               value: "root"
             - name: IPR_DATABASE_USERNAME

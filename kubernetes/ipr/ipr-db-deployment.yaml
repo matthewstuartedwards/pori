@@ -21,6 +21,15 @@ spec:
       labels:
         io.kompose.service: ipr-db
     spec:
+      #initContainers:
+      #  - name: ipr-init-postgres
+      #    image: busybox
+      #    command: ["cp", "/mnt/dump/ipr_new_deployment.postgres.dump", "/docker-entrypoint-initdb.d/"]
+      #    volumeMounts:
+      #      - name: postgres-bootstrap-pv
+      #        mountPath: /mnt/dump/
+      #      - name: pg-dump-init
+      #        mountPath: "/docker-entrypoint-initdb.d/"
       containers:
         - env:
             - name: DATABASE_NAME
@@ -48,7 +57,22 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
           name: ipr-db
+          volumeMounts:
+            - name: ipr-database
+              mountPath: /var/lib/postgresql/data/
+            - name: ipr-bootstrap
+              mountPath: "/docker-entrypoint-initdb.d/"
           ports:
             - containerPort: 5432
               protocol: TCP
       restartPolicy: Always
+      volumes:
+        - name: ipr-bootstrap
+          persistentVolumeClaim:
+            claimName: ipr-bootstrap-claim
+        - name: pg-dump-init
+          emptyDir: {}
+        - name: ipr-database
+          persistentVolumeClaim:
+            claimName: ipr-database-claim
+

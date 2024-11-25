@@ -32,7 +32,7 @@ spec:
           args: # Make a temp directory for the wal and then launch the server.
             - |
               mkdir /tmp/wal
-              server.sh -Dstorage.wal.path=/tmp/wal -Ddistributed=true -D-Dlog.file.level=FINE
+              server.sh -Dstorage.wal.path=/tmp/wal -D-Dlog.file.level=FINE
           name: graphkb-db
           ports:
             - containerPort: 2424

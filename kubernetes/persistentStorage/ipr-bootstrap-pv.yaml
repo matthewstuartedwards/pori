@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ipr-bootstrap
+  namespace: ipr
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /storage/kubernetesStorage/ipr-db-bootstrap/  # Path on the host where the dump file is stored
+    type: Directory
