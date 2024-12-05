@@ -29,4 +29,6 @@ psql -U $POSTGRES_USER -d $DATABASE_NAME -c "GRANT SELECT ON ALL TABLES IN SCHEM
 
 psql -U $POSTGRES_USER -d pori -c "grant all privileges on user_metadata to ipr_ro;"
 psql -U $POSTGRES_USER -d pori -c "grant all privileges on user_metadata_id_seq to ipr_ro;"
-psql -U $POSTGRES_USER -d pori -c "grant all privileges on all tables in schema \"public\" to ipr_ro;"\
+psql -U $POSTGRES_USER -d pori -c "grant all privileges on all tables in schema \"public\" to ipr_ro;"
+
+psql -U $POSTGRES_USER -d pori -c "GRANT ALL privileges ON ALL SEQUENCES IN schema public TO ipr_ro;"
