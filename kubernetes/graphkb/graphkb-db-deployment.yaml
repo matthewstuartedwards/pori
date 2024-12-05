@@ -14,7 +14,7 @@ spec:
     matchLabels:
       io.kompose.service: graphkb-db
   strategy:
-    type: Recreate
+    type: Recreate 
   template:
     metadata:
       annotations:
@@ -28,11 +28,14 @@ spec:
             - name: ORIENTDB_ROOT_PASSWORD
               value: root
           image: orientdb:3.0
+          #command: ["server.sh"]
           command: ["/bin/sh", "-c"]
           args: # Make a temp directory for the wal and then launch the server.
             - |
               mkdir /tmp/wal
-              server.sh -Dstorage.wal.path=/tmp/wal -D-Dlog.file.level=FINE
+              export JAVA_OPTS_SCRIPT=-XX:+UseContainerSupport
+              export OREINTDB_OPTS_MEMORY="-Xms2G -Xmx2G"
+              server.sh -Dlog.file.level=FINE 
           name: graphkb-db
           ports:
             - containerPort: 2424
@@ -48,7 +51,7 @@ spec:
               cpu: "2"
           volumeMounts:
             - mountPath: /orientdb/databases/
-              name: hostpath-vol0
+              name: hostpath-graphkb
               #name: db-claim1
               #subPath: backup
             #- mountPath: /orientdb/databases
@@ -58,7 +61,7 @@ spec:
       restartPolicy: Always
       volumes: [
         {
-        "name": "hostpath-vol0",
+        "name": "hostpath-graphkb",
         "hostPath": {
           "path": "/orientdb/",
           "type": "DirectoryOrCreate"
