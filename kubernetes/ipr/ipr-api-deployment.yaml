@@ -54,15 +54,15 @@ spec:
               value: "redis.db.svc.cluster.local"
             - name: IPR_REDIS_PORT
               value: "6379"
-          #livenessProbe:
-          #  exec:
-          #    command:
-          #      - curl
-          #      - -f
-          #      - http://ipr_api:8080/api/spec.json
-          #  failureThreshold: 5
-          #  periodSeconds: 30
-          #  timeoutSeconds: 10
+          livenessProbe:
+            exec:
+              command:
+                - curl
+                - -f
+                - http://ipr/api/spec.json
+            failureThreshold: 5
+            periodSeconds: 30
+            timeoutSeconds: 10
           name: ipr-api
           ports:
             - containerPort: 8080
