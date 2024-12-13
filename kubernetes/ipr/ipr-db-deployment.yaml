@@ -58,19 +58,24 @@ spec:
             timeoutSeconds: 5
           name: ipr-db
           volumeMounts:
-            - name: hostpath-postgres
+            - name: postgres-storage
               mountPath: "/var/lib/postgresql/data/"
           ports:
             - containerPort: 5432
               protocol: TCP
       restartPolicy: Always
-      volumes: [
-        {
-        "name": "hostpath-postgres",
-        "hostPath": {
-          "path": "/var/lib/postgresql/data/",
-          "type": "DirectoryOrCreate"
-          }
-        }
-      ]
+      volumes: 
+        - name: postgres-storage
+          persistentVolumeClaim: 
+            claimName: ipr-database-claim
+      
+      #[
+      #  {
+      #  "name": "hostpath-postgres",
+      #  "hostPath": {
+      #    "path": "/var/lib/postgresql/data/",
+      #    "type": "DirectoryOrCreate"
+      #    }
+      #  }
+      #]
 

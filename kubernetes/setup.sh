@@ -1,7 +1,10 @@
 #!/bin/bash
 #eval $(minikube docker-env) # This is needed whenever building a local docker image.  If not used, newly built containers will never be found by Kubernetes.
-
-minikube start --driver=docker --mount --mount-string "/storage/kubernetesStorage/orientdb/:/orientdb/" --mount-string "/storage/kubernetesStorage/ipr-db-bootstrap/:/docker-entrypoint-initdb.d/" --mount-string "/storage/kubernetesStorage/postgresDb/:/var/lib/postgresql/data/"
+#minikube start --mount --mount-string "/storage/kubernetesStorage/orientdb/:/orientdb/" --mount-string "/storage/kubernetesStorage/ipr-db-bootstrap/:/docker-entrypoint-initdb.d/" --mount-string "/storage/kubernetesStorage/postgresDb/:/var/lib/postgresql/data/"
+minikube start
+minikube addons enable volumesnapshots
+minikube addons enable csi-hostpath-driver
+kubectl patch storageclass csi-hostpath-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 
 kubectl create namespace graphkb
 kubectl create namespace ipr
@@ -23,11 +26,13 @@ export DB_DUMP_LOCATION=/storage/gitRepos/pori_ipr_api/database_for_new_deployme
 export DATABASE_HOSTNAME=db.ipr.svc.cluster.local
 export CURR_TEMPLATE=template
 
-kubectl apply -f redis -f keycloak -f network -f graphkb -f ipr 
+kubectl apply -f redis -f keycloak -f graphkb -f ipr -f persistentStorage/ipr-postgres-pv-claim.yaml
 
+sleep 20
+kubectl apply -f network
 PODNAME=$(kubectl get pods -n ipr --no-headers | awk '{print $1}' | grep '^db-' | head -n 1 ) 
 echo copying database to continer $PODNAME
-sleep 10
+sleep 120
 # Copy the database bootstrap to the container.
 kubectl cp /storage/kubernetesStorage/ipr-db-bootstrap/ipr_new_deployment.postgres.dump -n ipr $PODNAME:/docker-entrypoint-initdb.d/
 kubectl cp /storage/kubernetesStorage/ipr-db-bootstrap/databaseSetup.sh  -n ipr $PODNAME:/docker-entrypoint-initdb.d/
