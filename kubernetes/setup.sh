@@ -1,5 +1,5 @@
 #!/bin/bash
-#eval $(minikube docker-env) # This is needed whenever building a local docker image.  If not used, newly built containers will never be found by Kubernetes.
+eval $(minikube docker-env) # This is needed whenever building a local docker image.  If not used, newly built containers will never be found by Kubernetes.
 #minikube start --mount --mount-string "/storage/kubernetesStorage/orientdb/:/orientdb/" --mount-string "/storage/kubernetesStorage/ipr-db-bootstrap/:/docker-entrypoint-initdb.d/" --mount-string "/storage/kubernetesStorage/postgresDb/:/var/lib/postgresql/data/"
 minikube start
 minikube addons enable volumesnapshots
@@ -16,6 +16,7 @@ minikube addons enable ingress
 docker build /storage/gitRepos/pori_ipr_api/ -t bcgsc/pori-ipr-api:uofc
 docker build -f /storage/gitRepos/pori/demo/Dockerfile.auth /storage/gitRepos/pori/ -t pori-keycloak
 docker build -f /storage/gitRepos/pori_graphkb_loader/Dockerfile.snakemake -t bcgsc/pori-graphkb-loader:latest /storage/gitRepos/pori_graphkb_loader/
+docker build -f /storage/gitRepos/pori_ipr_client/Dockerfile -t bcgsc/pori-ipr-client:ucalgary /storage/gitRepos/pori_ipr_client/
 
 export IPR_SERVICE_PASSWORD=root
 export IPR_SERVICE_USER=ipr_ro
@@ -26,7 +27,7 @@ export DB_DUMP_LOCATION=/storage/gitRepos/pori_ipr_api/database_for_new_deployme
 export DATABASE_HOSTNAME=db.ipr.svc.cluster.local
 export CURR_TEMPLATE=template
 
-kubectl apply -f redis -f keycloak -f graphkb -f ipr -f persistentStorage/ipr-postgres-pv-claim.yaml
+kubectl apply -f redis -f keycloak -f graphkb -f ipr -f persistentStorage
 
 sleep 20
 kubectl apply -f network

@@ -28,6 +28,7 @@ psql -U $POSTGRES_USER -c "GRANT CONNECT ON DATABASE $DATABASE_NAME TO $READONLY
 psql -U $POSTGRES_USER -d $DATABASE_NAME -c "GRANT SELECT ON ALL TABLES IN SCHEMA public TO $READONLY_USER;"
 
 psql -U $POSTGRES_USER -d pori -c "grant all privileges on user_metadata to ipr_ro;"
+psql -U $POSTGRES_USER -d pori -c "grant all privileges on user_tables to ipr_ro;"
 psql -U $POSTGRES_USER -d pori -c "grant all privileges on user_metadata_id_seq to ipr_ro;"
 psql -U $POSTGRES_USER -d pori -c "grant all privileges on all tables in schema \"public\" to ipr_ro;"
 

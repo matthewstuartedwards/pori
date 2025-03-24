@@ -39,7 +39,8 @@ spec:
               value: "http://keycloak/auth"
             - name: PUBLIC_PATH
               value: /
-          image: bcgsc/pori-ipr-client:latest
+          image: bcgsc/pori-ipr-client:ucalgary
+          imagePullPolicy: IfNotPresent
           name: ipr-client
           ports:
             - containerPort: 80

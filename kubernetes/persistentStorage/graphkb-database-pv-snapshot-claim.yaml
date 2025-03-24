@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: graphkb-database-pv-snapshot-claim
+  namespace: graphkb
+spec:
+  storageClassName: standard
+  #reclaimPolicy: retain
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
