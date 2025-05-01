@@ -2,7 +2,7 @@
 apiVersion: snapshot.storage.k8s.io/v1
 kind: VolumeSnapshot
 metadata:
-  name: graphkb-orientdb-snapshot-mar24
+  name: graphkb-orientdb-snapshot-mar25
   namespace: graphkb
 spec:
   volumeSnapshotClassName: csi-hostpath-snapclass
