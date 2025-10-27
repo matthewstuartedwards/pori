@@ -23,8 +23,6 @@ spec:
       labels:
         io.kompose.service: keycloak
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: JAVA_OPTS_APPEND

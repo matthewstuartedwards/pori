@@ -21,8 +21,6 @@ spec:
       labels:
         io.kompose.service: ipr-db
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       #initContainers:
       #  - name: ipr-init-postgres
       #    image: busybox

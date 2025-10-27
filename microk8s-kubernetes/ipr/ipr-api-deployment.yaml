@@ -23,8 +23,6 @@ spec:
       labels:
         io.kompose.service: ipr-api
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - args:
             - npm 

@@ -1,0 +1,10 @@
+# example-csi-snapshot.yaml
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: ipr-postgres-snapshot-mar18
+  namespace: ipr
+spec:
+  volumeSnapshotClassName: csi-hostpath-snapclass
+  source:
+    persistentVolumeClaimName: ipr-database-claim

@@ -20,8 +20,6 @@ spec:
       labels:
         io.kompose.service: graphkb-db
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: ORIENTDB_ROOT_PASSWORD

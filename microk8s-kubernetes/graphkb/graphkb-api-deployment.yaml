@@ -23,8 +23,6 @@ spec:
       labels:
         io.kompose.service: graphkb-api
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: GKB_CORS_ORIGIN

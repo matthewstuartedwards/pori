@@ -21,8 +21,6 @@ spec:
       labels:
         io.kompose.service: redis
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - image: redis:6.2-alpine
           name: redis
