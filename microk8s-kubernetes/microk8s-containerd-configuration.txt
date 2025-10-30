@@ -1,0 +1,4 @@
+--config ${SNAP_DATA}/args/containerd.toml
+--root /app/microk8s/lib/containerd
+--state /app/microk8s/run/containerd
+--address ${SNAP_COMMON}/run/containerd.sock

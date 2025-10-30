@@ -5,6 +5,26 @@
 #minikube -p minikube docker-env | source
 #eval $(minikube docker-env) # This is needed whenever building a local docker image.  If not used, newly built containers will never be found by Kubernetes.
 
+########### ONE TIME SETUP
+# Setup the microk8s envrionment to use the /app mount instead of root volume
+# sudo nano /var/snap/microk8s/current/args/containerd
+#--config ${SNAP_DATA}/args/containerd.toml
+#--root /app/microk8s/var/lib/containerd
+#--state /app/microk8s/run/containerd
+#--address ${SNAP_COMMON}/run/containerd.sock
+echo "Performing SED replacement on containerd"
+sudo sed -i '/--root /c\--root /app/microk8s/var/lib/containerd' /var/snap/microk8s/current/args/containerd
+sudo sed -i '/--state /c\--state /app/microk8s/run/containerd' /var/snap/microk8s/current/args/containerd
+
+echo "Checking permissions on /app/microk8s"
+sudo chown -R root:root /app/microk8s
+sudo chown -R 700 /app/microk8s
+echo "Restarting microk8s"
+microk8s stop
+microk8s start
+# microk8s kubectl -n kube-system edit deploy hostpath-provisioner
+# edit all instances of /var/snap/microk8s to /app/microk8s
+echo "Setting up microk8s plugins"
 microk8s enable dns
 
 minikubeIP=$(microk8s kubectl get svc -n kube-system kube-dns -o jsonpath='{.spec.clusterIP}')
@@ -17,12 +37,32 @@ CLUSTER_DNS_IP=$(microk8s kubectl -n kube-system get svc kube-dns -o jsonpath='{
 # If system uses snap for microk8s install
 #sudo snap restart microk8s.daemon-kubelet
 
-microk8s enable storage
+# I think this is deprecated
+#microk8s enable storage
+microk8s enable hostpath-storage
+mkdir -p /app/microk8s/default-storage
+
+cat <<EOF | sudo tee /tmp/custom-storageclass.yaml > /dev/null
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: custom-storageclass
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Retain
+parameters:
+  pvDir: /app/microk8s/default-storage
+volumeBindingMode: WaitForFirstConsumer
+EOF
+
+microk8s kubectl apply -f /tmp/custom-storageclass.yaml
+microk8s kubectl patch storageclass microk8s-hostpath -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false"}}}'
+microk8s kubectl patch storageclass custom-storageclass -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
 microk8s enable ingress
 #microk8s enable rbac
 microk8s enable metrics-server
 microk8s enable dashboard
-microk8s enable hostpath-storage
+
 
 microk8s kubectl create namespace graphkb
 microk8s kubectl create namespace ipr
