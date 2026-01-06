@@ -23,8 +23,8 @@ spec:
       labels:
         io.kompose.service: graphkb-api
     spec:
-#      hostNetwork: true
-#      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: GKB_CORS_ORIGIN
@@ -45,7 +45,7 @@ spec:
               #value: http://keycloak:8888/auth/realms/PORI/protocol/openid-connect/token
               value: http://keycloak/auth/realms/PORI/protocol/openid-connect/token
             - name: KEY_PASSPHRASE
-          image: ucalgary/pori-graphkb-api:latest
+          image: 10.44.121.41:80/ucalgary/pori-graphkb-api:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             exec:

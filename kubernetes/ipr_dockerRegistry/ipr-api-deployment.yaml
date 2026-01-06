@@ -45,8 +45,7 @@ spec:
               value: "ipr_graphkb_link"
             - name: IPR_GRAPHKB_URI
               #value: "http://graphkb_api:8080/api"
-              #value: "http://ipr/api"
-              value: "http://graphkb/api"
+              value: "http://ipr/api"
             - name: IPR_GRAPHKB_USERNAME
               value: "ipr_graphkb_link"
             - name: IPR_KEYCLOAK_KEYFILE
@@ -79,8 +78,8 @@ spec:
               readOnly: true
           resources:
             limits:
-              memory: 5Gi
-              cpu: "1"
+              memory: 20Gi
+              cpu: "4"
             requests:
               memory: 512Mi
               cpu: "0.2"

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: ipr-client-ingress
+  namespace: ipr
+  annotations:
+     nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ipr
+    http:
+      paths:
+      - backend:
+          service:
+            name: client
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+      - backend:
+          service:
+            name: api
+            port:
+              number: 8081
+        path: /api
+        pathType: Prefix
+        

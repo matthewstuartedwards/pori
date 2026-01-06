@@ -23,8 +23,8 @@ spec:
       labels:
         io.kompose.service: keycloak
     spec:
-      #hostNetwork: true
-      #dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: JAVA_OPTS_APPEND
@@ -37,15 +37,7 @@ spec:
               value: "true"
             - name: DB_VENDOR
               value: "h2"
-            - name: KEYCLOAK_FRONTEND_URL
-              value: "http://keycloak/auth"
-            - name: KEYCLOAK_HOSTNAME
-              value: "keycloak"
-            #- name: KEYCLOAK_LOGLEVEL
-            #  value: "DEBUG"
-
-
-          image: pori-keycloak
+          image: 10.44.121.41:80/pori-keycloak
           imagePullPolicy: IfNotPresent
           #livenessProbe:
           #  exec:

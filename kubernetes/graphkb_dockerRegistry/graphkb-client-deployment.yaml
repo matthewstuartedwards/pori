@@ -5,44 +5,40 @@ metadata:
     kompose.cmd: kompose --file ../docker-compose.dev.yml convert
     kompose.version: 1.34.0 (cbf2835db)
   labels:
-    io.kompose.service: ipr-client
+    io.kompose.service: graphkb-client
   name: client
-  namespace: ipr
+  namespace: graphkb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: ipr-client
+      io.kompose.service: graphkb-client
   template:
     metadata:
       annotations:
         kompose.cmd: kompose --file ../docker-compose.dev.yml convert
         kompose.version: 1.34.0 (cbf2835db)
       labels:
-        io.kompose.service: ipr-client
+        io.kompose.service: graphkb-client
     spec:
       containers:
         - env:
             - name: API_BASE_URL
-              #value: http://localhost:8081/api
-              #value: http://api.ipr.svc.cluster.local:8081
-              value: http://ipr
-            - name: GRAPHKB_URL
-              #value: http://localhost:5000
-              #value: http://client.graphkb.svc.cluster.local:5000
-              value: http://graphkb/
+              #value: http://localhost:8080
+              value: "http://graphkb"
+            - name: KEYCLOAK_CLIENT_ID
+              value: GraphKB
             - name: KEYCLOAK_REALM
               value: PORI
             - name: KEYCLOAK_URL
               #value: http://localhost:8888/auth
-              #value: "http://keycloak.security.svc.cluster.local:8888/auth"
               value: "http://keycloak/auth"
             - name: PUBLIC_PATH
               value: /
-          image: bcgsc/pori-ipr-client:ucalgary
-          #image: bcgsc/pori-ipr-client:v7.0.2
-          imagePullPolicy: IfNotPresent
-          name: ipr-client
+            #- name: IS_DEMO
+            #  value: "1"
+          image: bcgsc/pori-graphkb-client:v4.3.2
+          name: graphkb-client
           ports:
             - containerPort: 80
               protocol: TCP

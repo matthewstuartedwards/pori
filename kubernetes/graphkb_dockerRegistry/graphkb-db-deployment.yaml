@@ -20,8 +20,8 @@ spec:
       labels:
         io.kompose.service: graphkb-db
     spec:
-#      hostNetwork: true
-#      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
         - env:
             - name: ORIENTDB_ROOT_PASSWORD
@@ -53,20 +53,7 @@ spec:
               # Old hostpath method.  Not suitable for snapshotting or graphkb backups though.
               #name: hostpath-graphkb
               name: graphkb-database-storage
-          #livenessProbe:
-            #exec:
-            #  command:
-            #    - /bin/sh
-            #    - -c
-            #    - |
-            #      date '+%Y-%m-%d %H:%M:%S%z' >> /orientdb/databases/liveness.log && exit 0
-            #initialDelaySeconds: 5     # wait a bit before first probe
-            #periodSeconds: 10          # run every 10 seconds
-            #timeoutSeconds: 2          # keep it snappy
-            #failureThreshold: 3
       restartPolicy: Always
-      
-
       
       # Old hostpath volume method that worked for graphkb database purposes, but
       # wasn't suitable for snapshotting or graphkb backup script.
