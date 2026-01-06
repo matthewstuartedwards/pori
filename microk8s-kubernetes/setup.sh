@@ -16,6 +16,16 @@ echo "Performing SED replacement on containerd"
 sudo sed -i '/--root /c\--root /app/microk8s/var/lib/containerd' /var/snap/microk8s/current/args/containerd
 sudo sed -i '/--state /c\--state /app/microk8s/run/containerd' /var/snap/microk8s/current/args/containerd
 
+
+#   TODO:
+## Need to make /etc/docker/daemon.json match the following: (without comments)
+#{
+#   "data-root": "/app/docker/root",
+#   'insecure-registries" : [ "localhost:32000" ]
+#}
+
+
+
 echo "Checking permissions on /app/microk8s"
 sudo chown -R root:root /app/microk8s
 sudo chown -R 700 /app/microk8s
