@@ -29,6 +29,8 @@ spec:
           ports:
             - containerPort: 6379
               protocol: TCP
+            - containerPort: 6381
+              protocol: TCP
           livenessProbe:
             exec:
               command: 

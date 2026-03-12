@@ -50,7 +50,7 @@ spec:
               value: root
             - name: SERVICE_USER
               value: ipr_service
-          image: bcgsc/pori-ipr-demodb:v8.2.0
+          image: bcgsc/pori-ipr-demodb:latest
           livenessProbe:
             exec:
               command:

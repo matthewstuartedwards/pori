@@ -47,16 +47,16 @@ spec:
             - name: KEY_PASSPHRASE
           image: ucalgary/pori-graphkb-api:latest
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            exec:
-              command:
-                - curl
-                - -f
+          #livenessProbe:
+          #  exec:
+          #    command:
+                #- curl
+                #- -f
                 #- http://graphkb_api:8080/api/version
-                - http://graphkb/api/version
-            failureThreshold: 5
-            periodSeconds: 30
-            timeoutSeconds: 10
+                #- http://graphkb/api/version
+          #  failureThreshold: 5
+          #  periodSeconds: 30
+          #  timeoutSeconds: 10
           name: graphkb-api
           resources:
               resources:
@@ -73,7 +73,7 @@ spec:
             - mountPath: /keys
               name: graphkb-api-cm0
               readOnly: true
-      restartPolicy: Always
+#      restartPolicy: Never
       volumes:
         - configMap:
             name: graphkb-api-cm0

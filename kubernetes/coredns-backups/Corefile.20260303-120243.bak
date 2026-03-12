@@ -1,0 +1,59 @@
+.:53 {
+    errors
+    health {
+       lameduck 5s
+    }
+    ready
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+       pods insecure
+       fallthrough in-addr.arpa ip6.arpa
+       ttl 30
+    }
+    prometheus :9153
+    hosts {
+       192.168.49.1 host.minikube.internal
+
+       192.168.49.2 graphkb
+       192.168.49.2 graphkb.default.svc.cluster.local
+       192.168.49.2 graphkb.svc.cluster.local
+       192.168.49.2 graphkb.cluster.local
+
+       192.168.49.2 ipr
+       192.168.49.2 ipr.default.svc.cluster.local
+       192.168.49.2 ipr.svc.cluster.local
+       192.168.49.2 ipr.cluster.local
+
+       192.168.49.2 pori
+       192.168.49.2 pori.default.svc.cluster.local
+       192.168.49.2 pori.svc.cluster.local
+       192.168.49.2 pori.cluster.local
+
+       192.168.49.2 keycloak
+       192.168.49.2 keycloak.default.svc.cluster.local
+       192.168.49.2 keycloak.svc.cluster.local
+       192.168.49.2 keycloak.cluster.local
+
+       192.168.49.2 redis
+       192.168.49.2 redis.default.svc.cluster.local
+       192.168.49.2 redis.svc.cluster.local
+       192.168.49.2 redis.cluster.local
+       
+       192.168.49.2 iprdevredis
+       192.168.49.2 iprdevredis.bcgsc.ca
+       192.168.49.2 iprdevredis.default.svc.cluster.local
+       192.168.49.2 iprdevredis.svc.cluster.local
+       192.168.49.2 iprdevredis.cluster.local
+       
+       fallthrough
+    }
+    forward . /etc/resolv.conf {
+       max_concurrent 1000
+    }
+    cache 30 {
+       disable success cluster.local
+       disable denial cluster.local
+    }
+    loop
+    reload
+    loadbalance
+}
