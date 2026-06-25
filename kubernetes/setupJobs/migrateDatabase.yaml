@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate-db
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate-db
+          image: pori-migrations:latest
+          imagePullPolicy: Never
+          args:
+            - --url
+            - "postgres://postgres:$(IPR_SERVICE_PASS)@db.ipr.svc.cluster.local:$(DB_PORT)/pori"
+            - --migrations-path
+            - /migrations/v8.5.0
+            - --debug
+          env:
+            - name: IPR_SERVICE_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: ipr-db-secret
+                  key: IPR_SERVICE_PASS
+            - name: DB_PORT
+              value: "5432"

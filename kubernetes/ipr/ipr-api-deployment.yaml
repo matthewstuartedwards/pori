@@ -30,6 +30,7 @@ spec:
             - npm 
             - start
           #image: bcgsc/pori-ipr-api:v8.1.2
+          #image: bcgsc/pori-ipr-api:v8.2.0
           image: bcgsc/pori-ipr-api:uofc
           imagePullPolicy: IfNotPresent
           env:
@@ -62,6 +63,8 @@ spec:
               value: "8081"
             - name: REDIS_ENABLE_QUEUE
               value: ""
+            - name: REDIS_HOST
+              value: "redis.db.svc.cluster.local"
           #livenessProbe:
           #  exec:
           #    command:
