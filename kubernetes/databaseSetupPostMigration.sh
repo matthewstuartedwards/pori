@@ -14,3 +14,5 @@ psql -U $POSTGRES_USER -d pori -c "GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE
 psql -U $POSTGRES_USER -d pori -c "GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE reports_seqqc TO $READONLY_USER;"
 psql -U $POSTGRES_USER -d pori -c "GRANT ALL ON SEQUENCE reports_seqqc_id_seq TO $SERVICE_USER;"
 psql -U $POSTGRES_USER -d pori -c "GRANT ALL ON SEQUENCE reports_seqqc_id_seq TO $READONLY_USER;"
+
+psql -U $POSTGRES_USER -d pori -c "ALTER TABLE "public"."projects" ADD PRIMARY KEY (id);"

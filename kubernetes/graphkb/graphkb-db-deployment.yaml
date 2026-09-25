@@ -33,7 +33,7 @@ spec:
             - |
               mkdir /tmp/wal
               export JAVA_OPTS_SCRIPT=-XX:+UseContainerSupport
-              export OREINTDB_OPTS_MEMORY="-Xms2G -Xmx2G"
+              export ORIENTDB_OPTS_MEMORY="-Xms1G -Xmx2G"
               server.sh -Dlog.file.level=FINE 
           name: graphkb-db
           ports:
@@ -43,10 +43,10 @@ spec:
               protocol: TCP
           resources:
             requests:
-              memory: "2G"
+              memory: "1G"
               cpu: ".25"
             limits:
-              memory: "8G"
+              memory: "3G"
               cpu: "2"
           volumeMounts:
             - mountPath: /orientdb/databases/

@@ -78,6 +78,7 @@ docker build -f $PORI_REPOSITORY_ROOT/pori/migrations_container/Dockerfile $PORI
 
 sleep 60 # to wait for the database to be ready.
 # Copy the database bootstrap to the container.  Name it initialDatabase.dump so that the databaseSetup.sh script doesn't have to be modified to work with different database dumps.
+
 minikube kubectl -- cp $DB_DUMP_LOCATION -n ipr $PODNAME:/docker-entrypoint-initdb.d/initialDatabase.dump
 minikube kubectl -- cp databaseSetup.sh  -n ipr $PODNAME:/docker-entrypoint-initdb.d/
 minikube kubectl -- cp databaseSetupPostMigration.sh  -n ipr $PODNAME:/docker-entrypoint-initdb.d/
@@ -89,3 +90,12 @@ minikube kubectl -- apply -f setupJobs/migrateDatabase.yaml
 minikube kubectl -- wait --for=condition=complete job/migrate-db --timeout=300s
 
 minikube kubectl -- exec -n ipr $PODNAME -- /docker-entrypoint-initdb.d/databaseSetupPostMigration.sh
+
+#Modify the hosts file with the minikube IP.
+MINIKUBE_IP=$(minikube ip)
+HOSTNAME="pori ipr graphkb keycloak redis"
+
+if ! grep -q "[[:space:]]$HOSTNAME\$" /etc/hosts; then
+    echo "Need sudo permissions to modify hosts file"
+    echo "$MINIKUBE_IP $HOSTNAME" | sudo tee -a /etc/hosts > /dev/null
+fi

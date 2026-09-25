@@ -100,16 +100,16 @@ export TEMP_DB_NAME=temp_db
 export DB_DUMP_LOCATION=/app/pori_ipr_api/database_for_new_deployment/ipr_new_deployment.postgres.dump
 export DATABASE_HOSTNAME=db.ipr.svc.cluster.local
 export CURR_TEMPLATE=template
-sleep 60
+#sleep 60
 microk8s kubectl apply -f redis -f keycloak -f graphkb -f ipr -f persistentStorage
 
-sleep 20
+#sleep 20
 microk8s kubectl apply -f network
-PODNAME=$(microk8s kubectl get pods -n ipr --no-headers | awk '{print $1}' | grep '^db-' | head -n 1 ) 
-echo copying database to continer $PODNAME
-sleep 120
+#PODNAME=$(microk8s kubectl get pods -n ipr --no-headers | awk '{print $1}' | grep '^db-' | head -n 1 )
+#echo copying database to continer $PODNAME
+#sleep 120
 # Copy the database bootstrap to the container.
-microk8s kubectl cp /app/kubernetesStorage/ipr-db-bootstrap/ipr_new_deployment.postgres.dump -n ipr $PODNAME:/docker-entrypoint-initdb.d/
-microk8s kubectl cp /app/kubernetesStorage/ipr-db-bootstrap/databaseSetup.sh  -n ipr $PODNAME:/docker-entrypoint-initdb.d/
+#microk8s kubectl cp /app/kubernetesStorage/ipr-db-bootstrap/ipr_new_deployment.postgres.dump -n ipr $PODNAME:/docker-entrypoint-initdb.d/
+#microk8s kubectl cp /app/kubernetesStorage/ipr-db-bootstrap/databaseSetup.sh  -n ipr $PODNAME:/docker-entrypoint-initdb.d/
 
-microk8s kubectl exec -n ipr $PODNAME -- /docker-entrypoint-initdb.d/databaseSetup.sh
+#microk8s kubectl exec -n ipr $PODNAME -- /docker-entrypoint-initdb.d/databaseSetup.sh
